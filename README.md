@@ -21,3 +21,9 @@ Generate masks: Execute the mask-generation script. It ingests the same centroid
 Compile dataset: The output images and masks are saved in the specified directories, matching the S12-Coasts structure.
 
 See the repository README for details on configuration (e.g. region lists) and execution. By following these steps, users can fully regenerate the S12-Coasts benchmark (images + water masks) for any set of coastal regions, enabling consistent training and evaluation of coastline segmentation methods.
+
+### Authors
+1. Soheil Zaghian
+2. Seyed Ali Ahmadi
+3. Ali Mohammadzadeh
+4. Sadegh Jamali
