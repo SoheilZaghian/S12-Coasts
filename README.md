@@ -2,6 +2,7 @@
 
 The S12-Coasts project provides an automated pipeline to build a global coastline segmentation benchmark. It creates a multimodal dataset using Sentinel-1 SAR and Sentinel-2 optical imagery, integrating vector shoreline data from NOAA (CUSP), OpenStreetMap, and HydroLAKES to generate reference water masks. The resulting dataset contains 6,637 image patches (512×512 pixels) covering 33 diverse coastal and inland-water regions worldwide. This broad coverage and automated framework overcome the scarcity of large-scale labeled datasets in coastline mapping, enabling training and evaluation of deep-learning models (e.g. SegFormer) with robust transferability across different environments.
 
+![alt text](https://drive.google.com/file/d/12cC06O07ImpQ7V_bkhUR1FhrgDf9Ma7n/view?usp=drive_link)
 
 ## Data and Patch Extraction
 
