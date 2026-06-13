@@ -478,6 +478,9 @@ results = lori_cv_evaluation(
     metrics=["OA", "IoU", "F-score", "Precision", "Recall"]
 )
 ```
+### S12Coasts And Segmentaion Results 
+![Results](/Figures/results.png)
+
 
 ### Evaluation Metrics
 
