@@ -481,7 +481,7 @@ results = lori_cv_evaluation(
 
 The S12-Coasts dataset is openly accessible via Zenodo:
 
-[![Zenodo DOI](https://img.shields.io/badge/Zenodo-DOI%3A%2010.XXXXX-FAB70C?style=flat-square&logo=zenodo)]([https://zenodo.org/record/XXXXXXX](https://doi.org/10.5281/zenodo.16934885))
+[![Zenodo DOI](https://img.shields.io/badge/Zenodo-DOI%3A%2010.XXXXX-FAB70C?style=flat-square&logo=zenodo)](https://doi.org/10.5281/zenodo.16934885)
 
 ```
 S12-Coasts/
