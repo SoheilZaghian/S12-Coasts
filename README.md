@@ -75,35 +75,9 @@ The current version of S12-Coasts comprises 6,637 paired Sentinel-1 and Sentinel
 
 The S12-Coasts dataset is generated through a two-stage automated pipeline:
 
-```
-INPUT: Sentinel-1 (VV, VH) · Sentinel-2 (13 bands) · Water Boundary Vectors
-                                    │
-          ┌─────────────────────────┴──────────────────────────┐
-          │                                                     │
-   ┌──────▼──────────────┐                    ┌────────────────▼────────────────┐
-   │    STAGE 1          │                    │         STAGE 2                  │
-   │  Patch Generation   │ ──────────────────►│   Water Mask Generation (EOBC)   │
-   │  & Sampling         │                    │                                  │
-   └─────────────────────┘                    └──────────────────────────────────┘
-   • Stratified random                         POLYGON PATH → Rasterisation
-     sampling along                            POLYLINE PATH →
-     water boundaries                            ① Boundary rasterisation
-   • 512×512 px patches                          ② Connected component analysis
-     at 10 m resolution                          ③ Object-based feature extraction
-   • S1/S2 clipping                              ④ Ensemble clustering (×5 algorithms)
-   • Cloud cover filter                          ⑤ Region-based majority voting
-   • Temporal sync ≤1 day                              │
-                                                        ▼
-                                               BINARY WATER MASK
-                                                        │
-                                                        ▼
-                                               QUALITY CONTROL (H/B1/B2/M)
-                                                        │
-                                                        ▼
-                                               S12-COASTS DATASET
-```
+![Flowchart](/Figures/Framework.png)
 
----
+
 
 ## 📋 Pseudo-Code
 
