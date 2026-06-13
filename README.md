@@ -514,10 +514,10 @@ Zaghian, S., Mohammadzadeh, A., Ahmadi, S. A., & Jamali, S. (2025). S12-Coasts (
 
 | Name | Role |
 |:---|:---|
-| **Soheil Zaghian** | Framework design, dataset generation, lead author |
-| **Seyed Ali Ahmadi** | Segmentation model, LORI-CV evaluation |
-| **Ali Mohammadzadeh** | Supervision, methodology |
-| **Sadegh Jamali** | Supervision, validation |
+| **Soheil Zaghian** | Conceptualization, Methodology, dataset generation, Software,  Validation, Formal Analysis, Visualization|
+| **Seyed Ali Ahmadi** | Conceptualization, Methodology, Formal Analysis, dataset generation |
+| **Ali Mohammadzadeh** | Supervision, Conceptualization |
+| **Sadegh Jamali** | Supervision |
 
 Contributions are welcome — please open an [issue](../../issues) or submit a pull request.
 
@@ -530,7 +530,7 @@ Contributions are welcome — please open an [issue](../../issues) or submit a p
 - **NOAA National Geodetic Survey** for CUSP shoreline data
 - **HydroLakes** (Messager et al., 2016) for global lake polygon data
 - **Google Earth Engine** for cloud-based satellite data processing
-*Soheil Zaghian was funded by the Erasmus+ International Credit Mobility (ICM) programme for a six-month research stay at Lund University, Sweden, during this study.*
+- *Soheil Zaghian was funded by the Erasmus+ International Credit Mobility (ICM) programme for a six-month research stay at Lund University, Sweden, during this study.*
 ---
 
 ## 📜 License
