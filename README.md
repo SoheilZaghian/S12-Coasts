@@ -39,7 +39,7 @@ The current version of S12-Coasts comprises 6,637 paired Sentinel-1 and Sentinel
 ---
 
 ## 📊 Dataset at a Glance
-![Study Areas](CloudCover.png)
+![CloudCover](/Figures/CloudCover.png)
 | Property | Value |
 |:---|:---|
 | 🗺️ **Geographic Coverage** | 27 diverse water body regions worldwide |
@@ -62,7 +62,7 @@ The current version of S12-Coasts comprises 6,637 paired Sentinel-1 and Sentinel
 | **M** — Model Error | Framework failure; excluded from final dataset | < 2% |
 
 ### Geographic Coverage by Boundary Source
-
+![WaterCover](/Figures/WaterCover.png)
 | Source | Regions |
 |:---|:---|
 | **OSM** | Gulf of Mexico, South America, Baltic Sea, French Coast, West Africa, Madagascar, Red Sea, Persian Gulf, Indian Ocean, China East Coast, Philippine Coast, Australia East Coast |
