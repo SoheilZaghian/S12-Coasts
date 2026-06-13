@@ -39,7 +39,7 @@ The current version of S12-Coasts comprises 6,637 paired Sentinel-1 and Sentinel
 ---
 
 ## 📊 Dataset at a Glance
-
+![Study Areas](CloudCover.png)
 | Property | Value |
 |:---|:---|
 | 🗺️ **Geographic Coverage** | 27 diverse water body regions worldwide |
