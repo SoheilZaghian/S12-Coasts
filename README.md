@@ -13,7 +13,6 @@
 
 **Soheil Zaghian · Seyed Ali Ahmadi · Ali Mohammadzadeh · Sadegh Jamali**
 
-*ISPRS Journal of Photogrammetry and Remote Sensing · 2025*
 
 [📄 Paper](#) · [🗄️ Dataset (Zenodo)](#) · [📖 Docs](#) · [🐛 Issues](../../issues)
 
