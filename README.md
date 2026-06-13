@@ -4,7 +4,7 @@
 
 ### Automated Global Multimodal Benchmark for Water Body and Coastline Segmentation via Ensemble Object-Based Clustering
 
-[![Paper](https://img.shields.io/badge/ISPRS-Paper-0077B6?style=flat-square&logo=google-scholar&logoColor=white)](#)
+[![Paper](https://img.shields.io/badge/Paper-0077B6?style=flat-square&logo=google-scholar&logoColor=white)](#)
 [![Zenodo](https://img.shields.io/badge/Zenodo-Dataset-FAB70C?style=flat-square&logo=zenodo&logoColor=white)](#)
 [![License: CC BY 4.0](https://img.shields.io/badge/Dataset-CC%20BY%204.0-lightgrey?style=flat-square)](https://creativecommons.org/licenses/by/4.0/)
 [![License: MIT](https://img.shields.io/badge/Code-MIT-green?style=flat-square)](LICENSE)
