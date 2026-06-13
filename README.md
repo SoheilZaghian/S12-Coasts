@@ -75,7 +75,7 @@ The current version of S12-Coasts comprises 6,637 paired Sentinel-1 and Sentinel
 
 The S12-Coasts dataset is generated through a two-stage automated pipeline:
 
-![Flowchart](/Figures/Framework.png)
+![Flowchart](/Figures/Framework_plus.png)
 
 
 
