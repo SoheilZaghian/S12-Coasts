@@ -5,7 +5,7 @@
 ### Automated Global Multimodal Benchmark for Water Body and Coastline Segmentation via Ensemble Object-Based Clustering
 
 [![Paper](https://img.shields.io/badge/Paper-0077B6?style=flat-square&logo=google-scholar&logoColor=white)](#)
-[![Zenodo](https://img.shields.io/badge/Zenodo-Dataset-FAB70C?style=flat-square&logo=zenodo&logoColor=white)](#)
+[![Zenodo](https://img.shields.io/badge/Zenodo-Dataset-FAB70C?style=flat-square&logo=zenodo&logoColor=white)]([#](https://doi.org/10.5281/zenodo.16934885))
 [![License: CC BY 4.0](https://img.shields.io/badge/Dataset-CC%20BY%204.0-lightgrey?style=flat-square)](https://creativecommons.org/licenses/by/4.0/)
 [![License: MIT](https://img.shields.io/badge/Code-MIT-green?style=flat-square)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
@@ -502,19 +502,10 @@ S12-Coasts/
 
 If you use S12-Coasts in your research, please cite:
 
-Zaghian, S., Mohammadzadeh, A., Ahmadi, S. A., & Jamali, S. (2025). S12-Coasts (V 1.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.16934885
+Zaghian, S., Mohammadzadeh, A., Ahmadi, S. A., & Jamali, S. (2025). S12-Coasts (V 1.0) [Data set]. Zenodo. [https://doi.org/10.5281/zenodo.16934885](https://doi.org/10.5281/zenodo.16934885)
 
 ```bibtex
-@article{zaghian2025s12coasts,
-  title   = {S12-Coasts: Automated Generation of a Global Multimodal
-             Benchmark for Water Body and Coastline Segmentation
-             via Ensemble Object-Based Clustering},
-  author  = {Zaghian, Soheil and Ahmadi, Seyed Ali and
-             Mohammadzadeh, Ali and Jamali, Sadegh},
-  journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
-  year    = {2025},
-  doi     = {10.XXXXX/isprs.2025.XXXXX}
-}
+
 ```
 
 ---
