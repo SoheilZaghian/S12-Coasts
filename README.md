@@ -53,7 +53,7 @@ The current version of S12-Coasts comprises 6,637 paired Sentinel-1 and Sentinel
 | ☁️ **Cloud-Free Patches** | ~91% |
 
 ### Quality Label Distribution
-
+![Quality Control](Figures/QC.png)
 | Label | Description | Share |
 |:---|:---|:---:|
 | **H** — High Quality | Fine detail, strong spatio-temporal alignment | > 86% |
