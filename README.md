@@ -454,6 +454,7 @@ water_mask = majority_vote(cluster_maps, labelled_image)
 ## 🤖 Segmentation: SegFormer Baseline
 
 A SegFormer model with MiT-B1 backbone (~14M parameters) was used as a **proof-of-concept baseline** to evaluate the applicability of S12-Coasts under the **Leave-One-Region-In Cross-Validation (LORI-CV)** framework.
+![SegFormer](/Figures/SegFormer.png)
 
 > **LORI-CV:** The model is trained on patches from one region–source combination and evaluated on all remaining combinations. This procedure is repeated for all 33 combinations, enabling simultaneous assessment of model transferability and benchmark representativeness.
 
