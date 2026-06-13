@@ -5,7 +5,7 @@
 ### Automated Global Multimodal Benchmark for Water Body and Coastline Segmentation via Ensemble Object-Based Clustering
 
 [![Paper](https://img.shields.io/badge/Paper-0077B6?style=flat-square&logo=google-scholar&logoColor=white)](#)
-[![Zenodo](https://img.shields.io/badge/Zenodo-Dataset-FAB70C?style=flat-square&logo=zenodo&logoColor=white)](#)
+[![Zenodo]([https://img.shields.io/badge/Zenodo-Dataset-FAB70C?style=flat-square&logo=zenodo&logoColor=white](https://doi.org/10.5281/zenodo.16934885))](#)
 [![License: CC BY 4.0](https://img.shields.io/badge/Dataset-CC%20BY%204.0-lightgrey?style=flat-square)](https://creativecommons.org/licenses/by/4.0/)
 [![License: MIT](https://img.shields.io/badge/Code-MIT-green?style=flat-square)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
@@ -30,7 +30,7 @@ The current version of S12-Coasts comprises 6,637 paired Sentinel-1 and Sentinel
 
 <div align="center">
 
-![Study Areas](Data&StudyArea.jpg)
+![Study Areas](/Figures/StudyArea.png)
 
 *Figure 1. Global distribution of S12-Coasts patches across 27 diverse water body regions.*
 
@@ -482,7 +482,7 @@ results = lori_cv_evaluation(
 
 The S12-Coasts dataset is openly accessible via Zenodo:
 
-[![Zenodo DOI](https://img.shields.io/badge/Zenodo-DOI%3A%2010.XXXXX-FAB70C?style=flat-square&logo=zenodo)](https://zenodo.org/record/XXXXXXX)
+[![Zenodo DOI](https://img.shields.io/badge/Zenodo-DOI%3A%2010.XXXXX-FAB70C?style=flat-square&logo=zenodo)]([https://zenodo.org/record/XXXXXXX](https://doi.org/10.5281/zenodo.16934885))
 
 ```
 S12-Coasts/
@@ -538,7 +538,7 @@ Contributions are welcome — please open an [issue](../../issues) or submit a p
 - **NOAA National Geodetic Survey** for CUSP shoreline data
 - **HydroLakes** (Messager et al., 2016) for global lake polygon data
 - **Google Earth Engine** for cloud-based satellite data processing
-
+*Soheil Zaghian was funded by the Erasmus+ International Credit Mobility (ICM) programme for a six-month research stay at Lund University, Sweden, during this study.*
 ---
 
 ## 📜 License
@@ -550,7 +550,7 @@ Contributions are welcome — please open an [issue](../../issues) or submit a p
 
 <div align="center">
 
-**S12-Coasts** · ISPRS Journal of Photogrammetry and Remote Sensing · 2025
+**S12-Coasts** 
 
 Made with ❤️ for the remote sensing and coastal monitoring community
 
