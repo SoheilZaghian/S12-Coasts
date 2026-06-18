@@ -1,0 +1,33 @@
+# S12-Coasts Patch Generation Configuration
+# ==========================================
+# Edit this file to customise the pipeline for your region and environment.
+# Pass to the pipeline with: python patch_generation.py --config patch_config.yaml
+
+# ── Region Settings ────────────────────────────────────────────────────────
+region_name: "Madagascar_line"       # Must match a .zip shapefile in zip_files_directory
+
+# ── Sampling Settings ──────────────────────────────────────────────────────
+n_points: 300                        # Number of centroid points along the coastline
+
+# ── Patch Settings ─────────────────────────────────────────────────────────
+patch_size_m: 5120                   # Patch side length in metres (512 px × 10 m)
+patch_size_px: 512                   # Patch size in pixels
+resolution_m: 10                     # Output GSD in metres
+
+# ── Sentinel-2 Settings ────────────────────────────────────────────────────
+collection_sen2: "COPERNICUS/S2_SR_HARMONIZED"
+cloud_cover_threshold: 30            # Maximum cloud cover (%) for S2 image selection
+start_date: "2018-01-01"             # Start of imagery search window
+end_date: "2024-12-31"              # End of imagery search window
+
+# ── Sentinel-1 Settings ────────────────────────────────────────────────────
+collection_sen1: "COPERNICUS/S1_GRD"
+max_temporal_gap_days: 365           # Search window ±days around S2 acquisition date
+
+# ── File Paths ─────────────────────────────────────────────────────────────
+directory_path: "data/shapefiles/extracted/"     # Where extracted shapefiles are stored
+zip_files_directory: "data/shapefiles/zipped/"  # Where zipped shapefiles are stored
+output_folder: "outputs/patches/"               # Local output directory for metadata CSV
+
+# ── Google Drive Export ────────────────────────────────────────────────────
+drive_folder_prefix: "S12Coasts_Patches"        # GEE export folder prefix on Drive
