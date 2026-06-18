@@ -267,7 +267,7 @@ OUTPUT → S12-Coasts: 6,637 patches · 33 region-source combinations
 
 ```bash
 # Clone the repository
-git clone https://github.com/[username]/S12-Coasts.git
+git clone https://github.com/SoheilZaghian/S12-Coasts.git
 cd S12-Coasts
 
 # Create a virtual environment
@@ -282,18 +282,40 @@ pip install -r requirements.txt
 ### Requirements
 
 ```
-torch>=2.0.0
-torchvision>=0.15.0
-transformers>=4.30.0        # SegFormer
-earthengine-api>=0.1.350    # Google Earth Engine
-geopandas>=0.13.0
-rasterio>=1.3.0
-scikit-learn>=1.3.0
-scikit-fuzzy>=0.4.2         # Fuzzy C-means
+# S12-Coasts Requirements
+# =======================
+# Install with: pip install -r requirements.txt
+
+# ── Core Scientific Stack ──────────────────────────────────────────────────
 numpy>=1.24.0
 pandas>=2.0.0
+scipy>=1.11.0
 matplotlib>=3.7.0
+seaborn>=0.12.0
 tqdm>=4.65.0
+pyyaml>=6.0
+
+# ── Geospatial ─────────────────────────────────────────────────────────────
+GDAL>=3.6.0                    # For GeoTIFF I/O — install via conda recommended:
+                               # conda install -c conda-forge gdal
+geopandas>=0.13.0
+shapely>=2.0.0
+rasterio>=1.3.0
+
+# ── Google Earth Engine (Stage 1 only) ─────────────────────────────────────
+earthengine-api>=0.1.350       # Authenticate with: earthengine authenticate
+geemap>=0.27.0
+
+# ── Machine Learning ───────────────────────────────────────────────────────
+scikit-learn>=1.3.0
+scikit-image>=0.21.0
+scikit-fuzzy>=0.4.2            # Fuzzy C-Means (optional but recommended)
+
+# ── Deep Learning — SegFormer Baseline (Stage 3 only) ─────────────────────
+torch>=2.0.0
+torchvision>=0.15.0
+transformers>=4.30.0           # SegFormer implementation
+
 ```
 
 ---
