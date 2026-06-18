@@ -1,0 +1,29 @@
+# S12-Coasts EOBC Configuration
+# ================================
+# Edit this file to customise the EOBC pipeline for your region.
+# Pass to the pipeline with: python eobc.py --config configs/eobc_config.yaml
+
+# ── I/O Settings ───────────────────────────────────────────────────────────
+input_dir: "data/patches/Huron_Lake"      # Directory containing input GeoTIFF patches
+output_dir: "outputs/masks/Huron_Lake"    # Root output directory (S1/ S2/ gt/ created here)
+region_name: "Huron_Lake"                 # Region identifier used in logging and metadata
+
+# ── Feature Extraction ─────────────────────────────────────────────────────
+# Zero-based band indices in the stacked GeoTIFF:
+#   13 = MNDWI · 14 = NDVI · 15 = AWEI · 16 = WRI · 17 = NDPI
+#   18 = VV    · 19 = VH
+feature_bands: [13, 14, 15, 16, 17, 18, 19]
+n_pca_components: 5                       # Number of PCA components to retain
+
+# ── Patch Settings ─────────────────────────────────────────────────────────
+patch_size_px: 512                        # Centre-crop size in pixels
+
+# ── Visualisation ──────────────────────────────────────────────────────────
+visualise: false                          # Set true to display patch plots during processing
+
+# ── Region Metadata ────────────────────────────────────────────────────────
+metadata:
+  region_name: "Huron_Lake"
+  climate_zone: "Temperate"
+  agro_ecological_zone: "Moist"
+  country_name: "Canada"
