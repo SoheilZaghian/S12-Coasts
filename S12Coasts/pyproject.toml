@@ -1,0 +1,122 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "s12coasts"
+version = "1.0.0"
+description = "Automated Global Multimodal Benchmark for Water Body and Coastline Segmentation via Ensemble Object-Based Clustering"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+authors = [
+    { name = "Soheil Zaghian" },
+    { name = "Seyed Ali Ahmadi" },
+    { name = "Ali Mohammadzadeh" },
+    { name = "Sadegh Jamali" },
+]
+keywords = [
+    "remote sensing",
+    "coastline segmentation",
+    "water body mapping",
+    "benchmark dataset",
+    "Sentinel-1",
+    "Sentinel-2",
+    "ensemble clustering",
+    "deep learning",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: GIS",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+]
+
+# Core dependencies (always required)
+dependencies = [
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "scipy>=1.11.0",
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+    "tqdm>=4.65.0",
+    "pyyaml>=6.0",
+    "scikit-learn>=1.3.0",
+    "scikit-image>=0.21.0",
+    "scikit-fuzzy>=0.4.2",
+    "geopandas>=0.13.0",
+    "shapely>=2.0.0",
+]
+
+[project.optional-dependencies]
+# Stage 1 — Patch Generation (requires GEE)
+gee = [
+    "earthengine-api>=0.1.350",
+    "geemap>=0.27.0",
+]
+# Stage 2 — EOBC (requires GDAL — install via conda recommended)
+gdal = [
+    "GDAL>=3.6.0",
+    "rasterio>=1.3.0",
+]
+# Stage 3 — SegFormer Baseline
+segformer = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "transformers>=4.30.0",
+]
+# Full installation
+all = [
+    "s12coasts[gee,gdal,segformer]",
+]
+# Development tools
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.5.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/[username]/S12-Coasts"
+Repository = "https://github.com/[username]/S12-Coasts"
+Documentation = "https://github.com/[username]/S12-Coasts#readme"
+"Bug Tracker" = "https://github.com/[username]/S12-Coasts/issues"
+Dataset = "https://zenodo.org/record/XXXXXXX"
+Paper = "https://doi.org/10.XXXXX/isprs.2025.XXXXX"
+
+[project.scripts]
+s12coasts-patch = "s12coasts.patch_generation.cli:main"
+s12coasts-eobc  = "s12coasts.eobc.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["s12coasts*"]
+
+[tool.setuptools.package-data]
+"s12coasts" = ["configs/*.yaml", "py.typed"]
+
+[tool.black]
+line-length = 100
+target-version = ["py38", "py39", "py310", "py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=s12coasts --cov-report=term-missing"
+
+[tool.mypy]
+python_version = "3.8"
+ignore_missing_imports = true

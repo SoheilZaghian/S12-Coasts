@@ -1,0 +1,19 @@
+# MANIFEST.in — controls which non-Python files are included in the source distribution
+
+include README.md
+include LICENSE
+include requirements.txt
+include pyproject.toml
+include setup.cfg
+
+recursive-include configs *.yaml
+recursive-include s12coasts *.py *.yaml *.typed
+recursive-include tests *.py
+recursive-include notebooks *.ipynb
+
+exclude .gitignore
+exclude .github
+prune __pycache__
+prune *.egg-info
+prune dist
+prune build
