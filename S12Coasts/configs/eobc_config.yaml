@@ -1,0 +1,27 @@
+# S12-Coasts — Stage 2: EOBC Water Mask Generation Configuration
+# ================================================================
+# Usage: s12coasts-eobc --config configs/eobc_config.yaml
+
+# ── I/O ────────────────────────────────────────────────────────────────────
+input_dir:   "data/patches/Huron_Lake"     # Directory of input GeoTIFF patches
+output_dir:  "outputs/masks/Huron_Lake"   # S1/ S2/ gt/ created here
+region_name: "Huron_Lake"
+
+# ── Feature extraction ─────────────────────────────────────────────────────
+# Zero-based band indices in the stacked GeoTIFF:
+#   13=MNDWI  14=NDVI  15=AWEI  16=WRI  17=NDPI  18=VV  19=VH
+feature_bands:    [13, 14, 15, 16, 17, 18, 19]
+n_pca_components: 5
+
+# ── Patch crop ─────────────────────────────────────────────────────────────
+patch_size_px: 512                  # Centre-crop size in pixels
+
+# ── Visualisation ──────────────────────────────────────────────────────────
+visualise: false                    # Set true to display plots during processing
+
+# ── Region metadata ────────────────────────────────────────────────────────
+metadata:
+  region_name:          "Huron_Lake"
+  climate_zone:         "Temperate"
+  agro_ecological_zone: "Moist"
+  country_name:         "Canada"
