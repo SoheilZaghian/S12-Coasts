@@ -387,25 +387,35 @@ mypy>=1.5.0
 S12-Coasts/
 │
 ├── 📂 data/
+│   ├── __init__.py    
 │   ├── boundary_vectors/           # OSM, NOAA, HydroLakes vectors
 │   ├── patch_metadata/             # Patch coordinates and quality labels
 │   └── quality_control/            # QC results and labels
 │
-├── 📂 src/
-│   ├── 📂 stage1_patch_generation/
-│   │   ├── sampling.py             # Stratified random sampling
-│   │   ├── preprocessing.py        # S1/S2 pre-processing (GEE)
-│   │   ├── clipping.py             # Patch extraction
-│   │   └── filtering.py            # Cloud cover & temporal filtering
+├── 📂 s12coasts/
+│   ├── __init__.py   
+│   ├── 📂 patch_generation/
+│   │   ├── __init__.py
+│   │   ├── sampling.py             ← PointGenerator, ShapefileProcessor
+│   │   ├── boundary.py             ← PatchBoundaryCreator
+│   │   ├── processor.py            ← PatchProcessor
+│   │   └── filters.py              ← cloud/temporal filtering
 │   │
-│   ├── 📂 stage2_eobc/
-│   │   ├── boundary_type.py        # Polygon / Polyline identification
-│   │   ├── rasterisation.py        # Boundary rasterisation
-│   │   ├── connected_components.py # Region labelling (CCA)
-│   │   ├── feature_extraction.py   # Spectral indices + SAR + PCA
-│   │   ├── clustering.py           # Ensemble clustering (5 algorithms)
-│   │   ├── water_identification.py # MNDWI-based water class (Eq. 1)
-│   │   └── majority_voting.py      # Region-based majority voting (Eq. 2)
+│   ├── 📂 eobc/
+│   │   ├── __init__.py
+│   │   ├── features.py             ← FeatureExtractor
+│   │   ├── optimiser.py            ← ClusteringOptimiser
+│   │   ├── clusterer.py            ← EOBCClusterer
+│   │   ├── pipeline.py             ← EOBCPipeline
+│   │   └── algorithms.py           ← algorithm registry + param grids
+│   ├── 📂 io/
+│   │   ├── __init__.py
+│   │   ├── geotiff.py              ← GeoTIFFExporter
+│   │   └── metadata.py             ← MetadataManager
+│   └── 📂 utils/
+│   │   ├── __init__.py
+│   │   ├── config.py               ← load_config(), DEFAULT_CONFIG
+│   │   └── visualise.py            ← visualise_patch()
 │   │
 │   ├── 📂 quality_control/
 │   │   ├── visual_inspection.py    # QC assessment tools
@@ -425,10 +435,19 @@ S12-Coasts/
 │   └── 05_qualitative_assessment.ipynb
 │
 ├── 📂 configs/
+│   ├── patch_config.yaml
 │   ├── eobc_config.yaml
 │   └── segformer_config.yaml
+├── 📂 tests/
+│   ├── test_features.py
+│   ├── test_clustering.py
+│   └── test_pipeline.py
 │
-├── requirements.txt
+├── setup.py                        ← classic install
+├── pyproject.toml                  ← modern PEP 517/518 build config
+├── setup.cfg                       ← metadata + optional deps
+├── MANIFEST.in                     ← include non-Python files
+├── requirements.txt                ← development dependencies
 ├── LICENSE
 └── README.md
 ```
