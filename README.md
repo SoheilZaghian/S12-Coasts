@@ -334,9 +334,14 @@ s12coasts-eobc  --help
 ```
 # S12-Coasts Requirements
 # =======================
-# Install with: pip install -r requirements.txt
+# Install all:      pip install -r requirements.txt
+# Core only:        pip install s12coasts
+# With GEE:         pip install "s12coasts[gee]"
+# With GDAL:        pip install "s12coasts[gdal]"
+# With SegFormer:   pip install "s12coasts[segformer]"
+# Full:             pip install "s12coasts[all]"
 
-# ── Core Scientific Stack ──────────────────────────────────────────────────
+# ── Core (always required) ─────────────────────────────────────────────────
 numpy>=1.24.0
 pandas>=2.0.0
 scipy>=1.11.0
@@ -344,27 +349,33 @@ matplotlib>=3.7.0
 seaborn>=0.12.0
 tqdm>=4.65.0
 pyyaml>=6.0
-
-# ── Geospatial ─────────────────────────────────────────────────────────────
-GDAL>=3.6.0                    # For GeoTIFF I/O — install via conda recommended:
-                               # conda install -c conda-forge gdal
-geopandas>=0.13.0
-shapely>=2.0.0
-rasterio>=1.3.0
-
-# ── Google Earth Engine (Stage 1 only) ─────────────────────────────────────
-earthengine-api>=0.1.350       # Authenticate with: earthengine authenticate
-geemap>=0.27.0
-
-# ── Machine Learning ───────────────────────────────────────────────────────
 scikit-learn>=1.3.0
 scikit-image>=0.21.0
-scikit-fuzzy>=0.4.2            # Fuzzy C-Means (optional but recommended)
+scikit-fuzzy>=0.4.2
+geopandas>=0.13.0
+shapely>=2.0.0
 
-# ── Deep Learning — SegFormer Baseline (Stage 3 only) ─────────────────────
+# ── Stage 1 — Patch Generation (GEE) ──────────────────────────────────────
+earthengine-api>=0.1.350
+geemap>=0.27.0
+
+# ── Stage 2 — EOBC (GDAL — conda recommended) ─────────────────────────────
+# conda install -c conda-forge gdal
+GDAL>=3.6.0
+rasterio>=1.3.0
+
+# ── Stage 3 — SegFormer Baseline ──────────────────────────────────────────
 torch>=2.0.0
 torchvision>=0.15.0
-transformers>=4.30.0           # SegFormer implementation
+transformers>=4.30.0
+
+# ── Development & Testing ──────────────────────────────────────────────────
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.0.0
+isort>=5.12.0
+flake8>=6.0.0
+mypy>=1.5.0
 
 ```
 
