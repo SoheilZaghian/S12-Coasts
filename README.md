@@ -568,15 +568,24 @@ The S12-Coasts dataset is openly accessible via Zenodo:
 
 ```
 S12-Coasts/
-├── patches/
-│   ├── sentinel1/          # VV, VH polarisation (TIF)
-│   ├── sentinel2/          # 13 multispectral bands (TIF)
-│   └── water_masks/        # Binary water masks (TIF)
+├── Region_1/
+│   ├── sentinel1/          # sentinel1 - VV, VH polarisation (TIF)
+│   ├── sentinel2/          # sentinel2 - 13 multispectral bands (TIF)
+│   └── gt/                 # Binary water masks (TIF)
+├── Region_3/
+│   ├── sentinel1/          # sentinel1 - VV, VH polarisation (TIF)
+│   ├── sentinel2/          # sentinel2 - 13 multispectral bands (TIF)
+│   └── gt/                 # Binary water masks (TIF)
+├── Region_3/
+│   ├── sentinel1/          # sentinel1 - VV, VH polarisation (TIF)
+│   ├── sentinel2/          # sentinel2 - 13 multispectral bands (TIF)
+│   └── gt/                 # Binary water masks (TIF)
+.
+.
+.
 ├── metadata/
-│   ├── patch_info.csv      # Region, source, date, coordinates
-│   └── quality_labels.csv  # H / B1 / B2 / M per patch
-└── splits/
-    └── lori_cv_splits.json # LORI-CV train/test splits (33 folds)
+│   ├── Data_information.csv      # Region, source, date, coordinates, H / B1 / B2 / M per patch
+└── 
 ```
 
 ---
