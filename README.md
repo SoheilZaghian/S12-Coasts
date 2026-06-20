@@ -572,7 +572,7 @@ S12-Coasts/
 │   ├── sentinel1/          # sentinel1 - VV, VH polarisation (TIF)
 │   ├── sentinel2/          # sentinel2 - 13 multispectral bands (TIF)
 │   └── gt/                 # Binary water masks (TIF)
-├── Region_3/
+├── Region_2/
 │   ├── sentinel1/          # sentinel1 - VV, VH polarisation (TIF)
 │   ├── sentinel2/          # sentinel2 - 13 multispectral bands (TIF)
 │   └── gt/                 # Binary water masks (TIF)
