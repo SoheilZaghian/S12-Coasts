@@ -266,17 +266,67 @@ OUTPUT → S12-Coasts: 6,637 patches · 33 region-source combinations
 ### Installation
 
 ```bash
-# Clone the repository
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/SoheilZaghian/S12-Coasts.git
 cd S12-Coasts
+```
 
-# Create a virtual environment
+### 2. Set Up the Environment
+
+```bash
+# Create and activate a virtual environment
 python -m venv s12coasts_env
 source s12coasts_env/bin/activate      # Linux / Mac
 s12coasts_env\Scripts\activate         # Windows
+```
 
-# Install dependencies
+### 3. Install Dependencies
+
+> ⚠️ **GDAL must be installed before other packages.**  
+> We strongly recommend using conda for GDAL to avoid platform-specific build issues:
+
+```bash
+# Option A — conda (recommended)
+conda install -c conda-forge gdal
 pip install -r requirements.txt
+
+# Option B — pip only (Linux)
+pip install gdal
+pip install -r requirements.txt
+
+### 4. Authenticate Google Earth Engine (Stage 1 only)
+
+```bash
+earthengine authenticate
+```
+
+> This is required only for Stage 1 (patch generation).  
+> Follow the browser prompt to authorise access with your Google account.  
+> Once authenticated, GEE credentials are cached locally for future runs.
+
+### 5. Install as a Package (optional)
+
+```bash
+# Editable install — for development or direct import
+pip install -e .
+
+# Then use anywhere in Python
+from s12coasts.eobc import EOBCPipeline
+from s12coasts.patch_generation import PatchProcessor
+```
+### 6. Verify Installation
+
+```bash
+# Run the test suite
+pytest tests/ -v
+
+# Or check the CLI entry points
+s12coasts-patch --help
+s12coasts-eobc  --help
 ```
 
 ### Requirements
