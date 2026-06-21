@@ -88,11 +88,11 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/[username]/S12-Coasts"
-Repository = "https://github.com/[username]/S12-Coasts"
-Documentation = "https://github.com/[username]/S12-Coasts#readme"
-"Bug Tracker" = "https://github.com/[username]/S12-Coasts/issues"
-Dataset = "https://zenodo.org/record/XXXXXXX"
+Homepage = "https://github.com/SoheilZaghian/S12-Coasts"
+Repository = "https://github.com/SoheilZaghian/S12-Coasts"
+Documentation = "https://github.com/SoheilZaghian/S12-Coasts#readme"
+"Bug Tracker" = "https://github.com/SoheilZaghian/S12-Coasts/issues"
+Dataset = "https://doi.org/10.5281/zenodo.16934885"
 Paper = "https://doi.org/10.XXXXX/isprs.2025.XXXXX"
 
 [project.scripts]
