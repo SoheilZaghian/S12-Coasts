@@ -565,7 +565,6 @@ clusterer.cluster()
 mndwi_image = image_array[13]
 water_mask  = clusterer.majority_vote(label_image, mndwi_image)
 ```
-
 ---
 
 ## 🤖 Segmentation: SegFormer Baseline
@@ -645,7 +644,6 @@ summary_df = evaluator.run()
 # Step 5: Pivot results into a train × test metric matrix
 iou_matrix = evaluator.pivot_metric("IoU")
 oa_matrix  = evaluator.pivot_metric("OA")
-```
 ```
 ### S12Coasts And Segmentaion Results 
 ![Results](/Figures/results.png)
