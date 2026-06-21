@@ -71,6 +71,7 @@ segformer = [
     "torch>=2.0.0",
     "torchvision>=0.15.0",
     "transformers>=4.30.0",
+    "torchgeo>=0.5.0",
 ]
 # Full installation
 all = [
@@ -95,8 +96,9 @@ Dataset = "https://zenodo.org/record/XXXXXXX"
 Paper = "https://doi.org/10.XXXXX/isprs.2025.XXXXX"
 
 [project.scripts]
-s12coasts-patch = "s12coasts.patch_generation.cli:main"
-s12coasts-eobc  = "s12coasts.eobc.cli:main"
+s12coasts-patch   = "s12coasts.patch_generation.cli:main"
+s12coasts-eobc    = "s12coasts.eobc.cli:main"
+s12coasts-segment = "s12coasts.segmentation.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
