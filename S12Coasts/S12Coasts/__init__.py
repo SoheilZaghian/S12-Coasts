@@ -46,7 +46,7 @@ __author__ = (
 )
 __license__ = "MIT"
 __paper__ = (
-    "ISPRS Journal of Photogrammetry and Remote Sensing, 2025. "
+    "XXXXXXXXXXX, 2025. "
     "doi:10.XXXXX/isprs.2025.XXXXX"
 )
 
