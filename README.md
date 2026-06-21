@@ -458,70 +458,112 @@ S12-Coasts/
 
 ### Stage 1 — Patch Generation
 
-```python
-from src.stage1_patch_generation.sampling import generate_centroids
-from src.stage1_patch_generation.clipping import extract_patches
-from src.stage1_patch_generation.filtering import apply_filters
+```bash
+# Via CLI (recommended)
+s12coasts-patch --config configs/patch_config.yaml
 
-# Step 1: Generate centroids via stratified random sampling
-centroids = generate_centroids(
-    boundary_source="OSM",       # OSM / NOAA / HydroLakes
-    patch_size=512,
-    resolution=10,               # metres
-    avoid_overlap=True
-)
-
-# Step 2: Extract paired S1/S2 patches
-patches = extract_patches(
-    centroids=centroids,
-    s1_collection="COPERNICUS/S1_GRD",
-    s2_collection="COPERNICUS/S2_SR_HARMONIZED"
-)
-
-# Step 3: Apply quality filters
-filtered = apply_filters(
-    patches=patches,
-    max_cloud_cover=0.30,
-    max_temporal_gap_days=1
-)
+# Override specific options
+s12coasts-patch --region Madagascar_line --n_points 300 --start_date 2018-01-01
 ```
+
+```python
+# Via Python API
+from s12coasts.patch_generation import (
+    ShapefileProcessor,
+    PointGenerator,
+    PatchBoundaryCreator,
+    PatchProcessor,
+)
+from s12coasts.utils.config import load_config
+from shapely.ops import unary_union
+import geemap, ee
+
+ee.Initialize()
+config = load_config("configs/patch_config.yaml", config_type="patch")
+
+# Step 1: Load water boundary shapefile
+processor = ShapefileProcessor(
+    directory_path=config["directory_path"],
+    zip_files_directory=config["zip_files_directory"],
+)
+coast_gdf = processor.process_region(config["region_name"])
+
+# Step 2: Generate centroid points via stratified random sampling
+line_union   = unary_union(coast_gdf.geometry)
+points       = PointGenerator.generate_points(line_union, num_points=config["n_points"])
+centroid_gdf = PointGenerator.to_geodataframe(points)
+centroid_ee  = geemap.gdf_to_ee(centroid_gdf)
+
+# Step 3: Create 512×512 px square patch boundaries
+patch_creator     = PatchBoundaryCreator(patch_size_m=config["patch_size_m"])
+buffered_polygons = centroid_ee.map(patch_creator.create_patch_boundary)
+
+# Step 4: Retrieve S1/S2 imagery and submit GEE export tasks
+patch_processor = PatchProcessor(buffered_polygons, coast_gdf, config)
+metadata_df     = patch_processor.process_all_patches()
+# → Monitor exports: https://code.earthengine.google.com/tasks
+```
+
+---
 
 ### Stage 2 — Water Mask Generation (EOBC)
 
+```bash
+# Via CLI (recommended)
+s12coasts-eobc --config configs/eobc_config.yaml
+
+# Override specific options
+s12coasts-eobc --input_dir data/patches/Huron_Lake \
+               --output_dir outputs/masks/Huron_Lake \
+               --region Huron_Lake --visualise
+```
+
 ```python
-from src.stage2_eobc.rasterisation import rasterise_boundary
-from src.stage2_eobc.connected_components import label_regions
-from src.stage2_eobc.feature_extraction import extract_features
-from src.stage2_eobc.clustering import ensemble_clustering
-from src.stage2_eobc.majority_voting import majority_vote
+# Via Python API — full pipeline
+from s12coasts.eobc import EOBCPipeline
+from s12coasts.utils.config import load_config
 
-# Step 1: Rasterise boundary
-boundary_image = rasterise_boundary(boundary_patch)
+config   = load_config("configs/eobc_config.yaml", config_type="eobc")
+pipeline = EOBCPipeline(config)
+pipeline.run()
+# → Outputs: outputs/masks//S1/  S2/  gt/  data_information.csv
+```
 
-# Step 2: Connected component analysis → labelled regions
-labelled_image = label_regions(boundary_image)
-
-# Step 3: Object-based feature extraction
-# Spectral indices: MNDWI, NDVI, AWEI, WRI, NDPI (Sentinel-2)
-# SAR bands: VV, VH (Sentinel-1)
-# Statistics: mean, median, std per region → PCA (top-5)
-features = extract_features(
-    labelled_image=labelled_image,
-    s2_patch=s2_patch,
-    s1_patch=s1_patch,
-    n_pca_components=5
+```python
+# Via Python API — individual components
+from s12coasts.eobc import (
+    FeatureExtractor,
+    ClusteringOptimiser,
+    EOBCClusterer,
+    build_algorithm_registry,
 )
+from skimage.measure import label
+from skimage.morphology import disk, dilation
+
+# Step 1: Connected component analysis → labelled regions
+boundary    = image_array[20]                          # band 20 = water boundary
+dilated     = dilation(boundary, disk(1))
+label_image = label(~dilated.astype(bool), connectivity=1)
+
+# Step 2: Object-based feature extraction + PCA
+# Features: MNDWI, NDVI, AWEI, WRI, NDPI (S2) · VV, VH (S1)
+# Statistics: median, variance, mean per region → top-5 PCA components
+extractor    = FeatureExtractor(feature_bands=[13,14,15,16,17,18,19], n_pca_components=5)
+pca_features = extractor.extract(image_array, label_image)
+
+# Step 3: Grid-search hyperparameter optimisation (no ground truth required)
+optimiser          = ClusteringOptimiser(pca_features, patch_id=0)
+results_df, best_params_df = optimiser.run()
 
 # Step 4: Ensemble Object-Based Clustering (5 algorithms)
-cluster_maps = ensemble_clustering(
-    features=features,
-    algorithms=["kmeans", "agglomerative", "gmm",
-                "affinity_propagation", "fuzzy_cmeans"],
-    n_clusters=2
-)
+# K-Means · Agglomerative · Bayesian GMM · Affinity Propagation · Fuzzy C-Means
+clusterer = EOBCClusterer(build_algorithm_registry(), best_params_df, pca_features)
+clusterer.cluster()
 
-# Step 5: Region-based majority voting → binary water mask
-water_mask = majority_vote(cluster_maps, labelled_image)
+# Step 5: Water class identification via max MNDWI [Eq. 1]
+#         + Region-based majority voting [Eq. 2] → final binary water mask
+mndwi_image = image_array[13]
+water_mask  = clusterer.majority_vote(label_image, mndwi_image)
 ```
 
 ---
@@ -534,24 +576,76 @@ A SegFormer model with MiT-B1 backbone (~14M parameters) was used as a **proof-o
 > **LORI-CV:** The model is trained on patches from one region–source combination and evaluated on all remaining combinations. This procedure is repeated for all 33 combinations, enabling simultaneous assessment of model transferability and benchmark representativeness.
 
 ```python
-from src.segmentation.model import load_segformer
-from src.segmentation.train import train_model
-from src.segmentation.evaluate import lori_cv_evaluation
+```bash
+# Train on a single region
+s12coasts-segment --mode train \
+    --dataset_root outputs/masks/ \
+    --region Ontario_Lake \
+    --n_epochs 50
 
-# Load SegFormer baseline (MiT-B1, ~14M parameters)
-model = load_segformer(
-    backbone="mit-b1",
-    num_classes=2,               # water (1) / non-water (0)
-    pretrained=True
+# Full LORI-CV evaluation across all 33 region–source combinations
+s12coasts-segment --mode lori_cv \
+    --dataset_root outputs/masks/ \
+    --model_dir outputs/models/ \
+    --results_dir outputs/results/ \
+    --regions Ontario_Lake Baltic_Sea Great_Lakes Alaska
+
+# Evaluate a specific train → test pair
+s12coasts-segment --mode evaluate \
+    --train_region Ontario_Lake \
+    --test_region Baltic_Sea
+```
+
+```python
+# Via Python API
+from s12coasts.segmentation import (
+    S12CoastsDataset,
+    load_segformer,
+    train_region,
+    LORICVEvaluator,
 )
 
-# LORI-CV: train on one region, evaluate on all others
-results = lori_cv_evaluation(
+# Step 1: Build dataset and DataLoaders
+ds = S12CoastsDataset(
+    root="outputs/masks/",
+    region_name="Ontario_Lake",
+    quality_labels=["H"],       # High Quality patches only
+    batch_size=8,
+)
+ds.train_val_split(split_ratio=0.7)
+ds.create_samplers()
+ds.create_dataloaders()
+train_loader, val_loader = ds.get_dataloaders()
+
+# Step 2: Load SegFormer baseline (MiT-B1, ~14M parameters)
+model = load_segformer(backbone="nvidia/mit-b1")
+
+# Step 3: Train on a single region
+history = train_region(
     model=model,
-    dataset_path="data/s12coasts/",
-    n_combinations=33,
-    metrics=["OA", "IoU", "F-score", "Precision", "Recall"]
+    train_loader=train_loader,
+    val_loader=val_loader,
+    region_name="Ontario_Lake",
+    save_dir="outputs/models/",
+    n_epochs=50,
+    lr=6e-5,
 )
+print(f"Best IoU: {history['best_iou']:.4f} at epoch {history['best_epoch']}")
+
+# Step 4: Full LORI-CV evaluation
+evaluator = LORICVEvaluator(
+    dataset_root="outputs/masks/",
+    model_dir="outputs/models/",
+    results_dir="outputs/results/",
+    regions=["Ontario_Lake", "Baltic_Sea", "Great_Lakes", "Alaska"],
+    n_epochs=50,
+)
+summary_df = evaluator.run()
+
+# Step 5: Pivot results into a train × test metric matrix
+iou_matrix = evaluator.pivot_metric("IoU")
+oa_matrix  = evaluator.pivot_metric("OA")
+```
 ```
 ### S12Coasts And Segmentaion Results 
 ![Results](/Figures/results.png)
