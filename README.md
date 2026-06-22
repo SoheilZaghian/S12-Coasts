@@ -422,10 +422,13 @@ S12-Coasts/
 │   │   └── labelling.py            # Quality label assignment (H/B1/B2/M)
 │   │
 │   └── 📂 segmentation/
-│       ├── model.py                # SegFormer baseline (MiT-B1)
-│       ├── train.py                # Training script
-│       ├── evaluate.py             # LORI-CV evaluation
-│       └── metrics.py              # OA, IoU, F-score, Precision, Recall
+│       ├── __init__.py                
+│       ├── dataset.py                
+│       ├── model.py             
+│       ├── train.py                
+│       ├── evaluate.py             
+│       ├── visualise.py
+│       └── cli.py              
 │
 ├── 📂 notebooks/
 │   ├── 01_patch_generation.ipynb
