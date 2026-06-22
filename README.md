@@ -431,16 +431,15 @@ S12-Coasts/
 │       └── cli.py              
 │
 ├── 📂 notebooks/
-│   ├── 01_patch_generation.ipynb
-│   ├── 02_eobc_water_mask.ipynb
-│   ├── 03_segformer_training.ipynb
-│   ├── 04_lori_cv_evaluation.ipynb
-│   └── 05_qualitative_assessment.ipynb
+│   ├── Stage1_Patch_generation.ipynb
+│   ├── Stage2_EOBC.ipynb
+│   └── Stage3_Segmentation.ipynb 
+│    
 │
 ├── 📂 configs/
 │   ├── patch_config.yaml
-│   ├── eobc_config.yaml
-│   └── segformer_config.yaml
+│   └── eobc_config.yaml
+│   
 │
 ├── 📂 tests/
 │   ├── __init__.py
