@@ -441,9 +441,13 @@ S12-Coasts/
 │   ├── patch_config.yaml
 │   ├── eobc_config.yaml
 │   └── segformer_config.yaml
+│
 ├── 📂 tests/
+│   ├── __init__.py
+│   ├── test_clustering.py
 │   ├── test_features.py
 │   ├── test_clustering.py
+│   ├── test_segmentation.py
 │   └── test_pipeline.py
 │
 ├── setup.py                        ← classic install
